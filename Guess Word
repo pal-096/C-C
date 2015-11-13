@@ -1,0 +1,84 @@
+#include <iostream>
+#include <fstream>
+#include <string.h>
+#include<time.h>
+#include<stdlib.h>
+using namespace std;
+
+int main () {
+  cout<<"\t\t\tGUESS THE WORD\n\n";
+  srand(time(NULL));
+  int num=rand()%84;
+  char Word[20];
+  ifstream myfile ("Words.txt");
+  
+    while (!myfile.eof())
+    {
+      for(int i=0;i<num;i++)
+	myfile>>Word;
+	
+	break;
+    }
+    myfile.close();
+
+int l=strlen(Word);
+int cnt=0,cnt1=0;
+
+cout<<"\n\t\tNumber of letters in word:"<<l<<endl;
+cout<<"\n\t\tNumber of wrong attempts: 7"<<"\n\n";
+
+char wd[15]={'_','_','_','_','_','_','_','_','_','_','_','_','_','_'};
+char guess;
+char check[15];
+int x=0;
+
+for(int i=0;i<7;)
+{cnt1=0; int flag=0;
+cout<<"\n\tLetter:";
+cin>>guess;
+
+for(int f=0;f<x;f++)
+{if(check[f]==guess)
+flag=1;}
+
+if(flag==1)
+continue;
+
+else
+{
+
+for(int j=0;j<l;j++)
+{
+if(guess==Word[j])
+{wd[j]=guess;
+cnt++;
+cnt1++;}
+}
+
+if(cnt1==0)
+i++;
+
+check[x]=guess;
+x++;
+cout<<"\t";
+for(int k=0;k<l;k++)
+cout<<wd[k];
+cout<<endl;
+
+if(cnt==l)
+break;
+}
+
+}
+if(cnt==l)
+cout<<"\n\t\t\tYOU WON!\n";
+else{
+cout<<"\n\n\t\tWord was: ";
+for(int k=0;k<l;k++)
+cout<<Word[k];
+cout<<"\n\t\t       YOU LOST\n";} 
+
+
+
+  return 0;
+}
