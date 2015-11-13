@@ -1,0 +1,105 @@
+#include<iostream>
+#include<string>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+
+struct numbers
+{
+string units1[10]={"","One ","Two ","Three ","Four ","Five ","Six ","Seven ","Eight ","Nine "};
+string units2[10]={"Ten ","Eleven ","Twelve ","Thirteen ","Fourteen ","Fifteen ","Sixteen ","Seventeen ","Eighteen ","Nineteen "};
+string tens[10]={"","","Twenty ","Thirty ","Fourty ","Fifty ","Sixty ","Seventy ","Eighty ","Ninety "};
+string c[10]={"","","Hundred ","Thousand ","","Lakh ","","Crore ",""};
+};
+
+int GetNumberOfDigits (int i)
+{
+    return i > 0 ? (int) log10 ((double) i) + 1 : 1;
+}
+
+int Num_Name(int num,int digs)
+{
+numbers n1;
+int num1=num,n=digs-1;
+
+while(num1>=1000)
+{int z,num2=1;
+int power=pow(10,n);
+int rem=num1/power;
+if(rem)
+{
+if(n%2==0)
+{int b=pow(10,n-1);
+num2=num1/b;
+if(num2>=10&&num2<20)
+{int k=num2%10;cout<<n1.units2[k];n=n-2;z=n+1;}
+else 
+{if(n%2==0) cout<<n1.tens[rem];
+else cout<<n1.units1[rem];
+n--;z=n+1;}
+}
+else 
+{if(n%2==0) cout<<n1.tens[rem];
+else cout<<n1.units1[rem];
+n--;z=n+1; }
+
+if(num2%10==0)
+{cout<<n1.c[z-1];n--;}
+else
+cout<<n1.c[z];
+
+int c=pow(10,z);
+num1=num1%c;
+}
+
+else
+n--;
+}
+
+while(num1>=100&&num1<1000)
+{
+int a=pow(10,n);
+int rem=num1/a;
+cout<<n1.units1[rem];
+cout<<n1.c[n];
+num1=num1%a;
+n--;
+}
+
+if(num1>=20&&num1<100)
+{
+int rem=num1/10;
+cout<<n1.tens[rem];
+num1=num1%10;
+n--;
+
+cout<<n1.units1[num1];
+num1=num1%10;
+n--;
+}
+else if(num1>=10&&num1<20)
+{
+int i=num1%10;
+cout<<n1.units2[i];
+}
+else if(num1<10)
+{
+cout<<n1.units1[num1];
+}
+return 0;
+}
+
+int main()
+{
+int number;
+cout<<"Enter number\n";
+cin>>number;
+if(number==0)
+cout<<"Zero";
+else
+{
+int n=GetNumberOfDigits(number);
+Num_Name(number,n);}
+printf("\n");
+return 0;
+}
