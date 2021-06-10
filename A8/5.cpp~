@@ -1,0 +1,23 @@
+#include<iostream>
+
+using namespace std;
+class Number
+{int num;
+ public:
+  Number(){num=0;}
+  Number(int a){num=a;}
+  Number operator ++()
+  {Number N1;
+    N1.num=++num; return N1;}
+  void disp(){cout<<num;}
+};
+
+int main()
+{  Number N1,N2;int x;
+  cout<<"Enter a number: "; cin>>x;
+  N=Number(x);
+  N2=++N1;
+  cout<<"Incremented value: ";
+  N2.disp(); cout<<endl;
+  return 0;
+}

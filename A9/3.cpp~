@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+
+class Number{
+  int num;
+ public:
+  Number(){num=0;}
+  Number(int a){num=a;}
+  void disp(){cout<<num<<endl;}
+  friend istream& operator >>(istream&, Number N);
+  friend ostream& operator <<(ostream&, Number N);
+};
+
+istream& operator >>(istream &in, Number N)
+   {
+    in>>N.num;
+    return in;
+   }
+
+ostream& operator <<(ostream &out, Number N)
+   {
+    out<<N.num;
+    return out;
+   }
+
+int main()
+{
+  Number n;
+  cin>>n;
+  cout<<n;
+  cout<<endl;
+  return 0;
+}
